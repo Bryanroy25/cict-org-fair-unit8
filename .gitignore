@@ -47,3 +47,7 @@ app.*.map.json
 # Widget Preview related
 .widget_preview/
 cms.json 
+# Release secrets - never commit these
+android/key.properties
+*.jks
+*.keystore

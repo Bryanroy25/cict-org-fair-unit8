@@ -1,3 +1,4 @@
+
 import 'package:http/http.dart' as http;
 
 import '../../models/fair_event.dart';
@@ -21,7 +22,7 @@ class ContentfulEventSource implements EventSource {
 
   @override
   Future<List<FairEvent>> fetchEvents() async {
-    // Build Contentful API request.
+    // Build the correct Contentful API request.
     final uri = Uri.https(
       'cdn.contentful.com',
       '/spaces/$spaceId/environments/$environment/entries',
@@ -69,3 +70,4 @@ class ContentfulEventSource implements EventSource {
     }).toList();
   }
 }
+

@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 /// Opened by name from the drawer: Navigator.pushNamed(context, '/about').
 class AboutScreen extends StatelessWidget {
@@ -10,13 +12,12 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       appBar: AppBar(title: const Text('About the fair')),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          // Stack layers children on top of each other. Positioned pins the
-          // title to the bottom-left corner of the banner.
           SizedBox(
             height: 160,
             child: Stack(
@@ -73,8 +74,42 @@ class AboutScreen extends StatelessWidget {
               'right from this app.',
             ),
           ),
+          const Divider(),
+          const VersionTile(),
         ],
       ),
     );
   }
 }
+
+/// Displays the current application version and build number.
+class VersionTile extends StatefulWidget {
+  const VersionTile({super.key});
+
+  @override
+  State<VersionTile> createState() => _VersionTileState();
+}
+
+class _VersionTileState extends State<VersionTile> {
+  late final Future<PackageInfo> _info = PackageInfo.fromPlatform();
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<PackageInfo>(
+      future: _info,
+      builder: (context, snapshot) {
+        final info = snapshot.data;
+
+        final text = info != null
+            ? 'Version ${info.version} (build ${info.buildNumber})'
+            : 'Version ...';
+
+        return ListTile(
+          leading: const Icon(Icons.verified_outlined),
+          title: Text(text),
+        );
+      },
+    );
+  }
+}
+
