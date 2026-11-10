@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 import '../data/orgs.dart';
@@ -63,9 +64,10 @@ class EventTile extends StatelessWidget {
       ),
       subtitle: Text('${formatWhen(event.startsAt)}\n$where'),
       trailing: event.cancelled
-          ? const Chip(label: Text('Cancelled'))
+          ? const Chip(label: Text('Canceled'))
           : null,
       isThreeLine: true,
     );
   }
 }
+

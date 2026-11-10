@@ -163,7 +163,7 @@ void main() {
     );
 
     await show(true);
-    expect(find.text('Cancelled'), findsOneWidget);
+    expect(find.text('Canceled'), findsOneWidget);
     expect(
       tester.widget<Text>(find.text('Photo Walk')).style?.decoration,
       TextDecoration.lineThrough,
@@ -171,7 +171,7 @@ void main() {
     expect(find.byIcon(Icons.event_busy), findsOneWidget);
 
     await show(false);
-    expect(find.text('Cancelled'), findsNothing);
+    expect(find.text('Canceled'), findsNothing);
     expect(find.byIcon(Icons.event_busy), findsNothing);
   });
 
